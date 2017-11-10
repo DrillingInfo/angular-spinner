@@ -129,8 +129,11 @@
 		/* CommonJS module */
 		module.exports = factory(require('angular'), require('spin.js'));
 	} else if (typeof define === 'function' && define.amd) {
-		/* AMD module */
-		define(['angular', 'spin'], factory);
+    /* AMD module */
+    //DI: not sure why but our Typescript build is going into here but we need
+    //the module.exports format, so just force it, this is our own tag anyway
+    module.exports = factory(require('angular'), require('spin.js'));
+		// define(['angular', 'spin'], factory);
 	} else {
 		/* Browser global */
 		factory(root.angular, root.Spinner);
